@@ -26,6 +26,21 @@ defmodule MyString do
   def anagram?(word1, word2) do
     Enum.sort(word1) === Enum.sort(word2)
   end
+
+  def center(list) do
+    max_length = Enum.map(list, &String.length/1) |> Enum.max
+    Enum.map list, &(_center(&1, max_length)) |> IO.puts
+  end
+
+  defp _center(word, max_length) do
+    word_length = String.length word
+    pad_len = max_length - div(max_length - word_length, 2)
+    String.pad_trailing(word, pad_len) |> String.pad_leading(max_length)
+  end
+
+  def capitalize_sentences(str) do
+    String.split(str, ". ") |> Enum.map(&String.capitalize/1) |> Enum.join(". ")
+  end
 end
 
 defmodule Calculator do
